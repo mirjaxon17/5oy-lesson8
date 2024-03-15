@@ -15,9 +15,13 @@ class Database:
 
         cursor = database.cursor()
         cursor.execute(query)
-        if query_type == "insert":
+        data = ["insert", "create"]
+        if query_type in data:
             database.commit()
-            return "inserted"
-        if query_type == "select":
+            if query_type == "insert":
+                return "inserted"
+            elif query_type == "create":
+                return "created"
+        else: 
             return cursor.fetchall()
 
